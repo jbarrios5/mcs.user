@@ -15,4 +15,11 @@ public class UserDAOImpl implements  UserDAO {
         res.setUser(user);
         return res;
     }
+
+    @Override
+    public Boolean addUser(User user) {
+
+
+        return Boolean.TRUE;
+    }
 }

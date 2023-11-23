@@ -15,6 +15,7 @@ import py.com.jmbr.java.commons.exception.JMBRException;
 import py.com.jmbr.java.commons.exception.JMBRExceptionType;
 import py.com.jmbr.java.commons.logger.RequestUtil;
 import py.com.jmbr.mcs.user.dao.UserDAO;
+import py.com.jmbr.mcs.user.util.UserUtil;
 
 @Service
 public class UserServiceImpl implements  UserService{
@@ -43,13 +44,21 @@ public class UserServiceImpl implements  UserService{
         if(req == null)
             throw  new JMBRException("Request invalid", JMBRExceptionType.WARNING, HttpStatus.BAD_REQUEST);
 
-        User user = new User();
-        user.setStatus(Boolean.TRUE);
-        user.setPassword("asdfasdf");
-        user.setName("Juan Marcelo");
-        user.setLastName("Barrios Rivas");
-        user.setDocument("5436554");
-        data.setUser(user);
+        log.info(RequestUtil.LOG_FORMATT,logId,"addUser:Before bcrypt password",req.getUser().getPassword());
+        req.getUser().setPassword(UserUtil.passwordHash(req.getUser().getPassword()));
+        log.info(RequestUtil.LOG_FORMATT,logId,"addUser:After bcrypt password",req.getUser().getPassword());
+
+        log.info(RequestUtil.LOG_FORMATT,logId,"addUser:Before insert a new user",null);
+        Boolean isUserInserted = userDAO.addUser(req.getUser());
+        log.info(RequestUtil.LOG_FORMATT,logId,"addUser:After insert a user",isUserInserted);
+        String message;
+        if(isUserInserted)
+            message = "User inserted successfully!";
+        else
+            message = "Error inserting user";
+
+        data.setIsInserted(isUserInserted);
+        data.setMessage(message);
         result.setData(data);
         return result;
     }
