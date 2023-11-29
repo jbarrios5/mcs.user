@@ -22,6 +22,7 @@ public class DatasourceConfig {
     @DependsOn("hikariConfigPGS")
     @Primary
     public DataSource dataSourcePGS(HikariConfig hikariConfig){
+
         return new HikariDataSource(hikariConfig);
     }
 }

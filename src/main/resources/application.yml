@@ -8,3 +8,4 @@ datasource:
     jdbcUrl: jdbc:postgresql://localhost:5432/postgres
     password: 123456
     username: postgres
+

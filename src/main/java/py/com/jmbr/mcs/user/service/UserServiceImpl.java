@@ -14,6 +14,7 @@ import py.com.jmbr.java.commons.domain.mcs.user.UserPostRes;
 import py.com.jmbr.java.commons.exception.JMBRException;
 import py.com.jmbr.java.commons.exception.JMBRExceptionType;
 import py.com.jmbr.java.commons.logger.RequestUtil;
+import py.com.jmbr.mcs.user.constant.UserConstant;
 import py.com.jmbr.mcs.user.dao.UserDAO;
 import py.com.jmbr.mcs.user.util.UserUtil;
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements  UserService{
         String logId = RequestUtil.getLogId();
         UserGetResData result = new UserGetResData();
         log.info(RequestUtil.LOG_FORMATT,logId,"getUserByDocument:Before get user with document=",document);
-        UserGetRes data = userDAO.getUserByDocument(document);
+        UserGetRes data = userDAO.getUserByDocument(document,logId);
         log.info(RequestUtil.LOG_FORMATT,logId,"getUserByDocument:After get user with ",data.toString());
         result.setData(data);
         return result;
@@ -49,7 +50,8 @@ public class UserServiceImpl implements  UserService{
         log.info(RequestUtil.LOG_FORMATT,logId,"addUser:After bcrypt password",req.getUser().getPassword());
 
         log.info(RequestUtil.LOG_FORMATT,logId,"addUser:Before insert a new user",null);
-        Boolean isUserInserted = userDAO.addUser(req.getUser());
+        req.getUser().setStatus(UserConstant.STATUS_ACTIVE);
+        Boolean isUserInserted = userDAO.addUser(req.getUser(),logId);
         log.info(RequestUtil.LOG_FORMATT,logId,"addUser:After insert a user",isUserInserted);
         String message;
         if(isUserInserted)
