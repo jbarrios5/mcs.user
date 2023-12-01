@@ -31,15 +31,11 @@ public class UserController {
 
     @PostMapping(value = "/")
     @Operation(summary = "Add user",description = "Add a new user")
-    @SecurityAccess()
+
     public UserPostResData addUser(
-            @RequestBody @Valid UserPostReqData req,
-            @RequestHeader(value = UserConstant.ACCESS_TOKEN) String token,
-            BindingResult bindingResult
+            @RequestBody @Valid UserPostReqData req
     ){
-        if (bindingResult.hasErrors())
-            return null;
-        else
+
             return service.addUser(req.getData());
     }
     @PostMapping(value = "/test")

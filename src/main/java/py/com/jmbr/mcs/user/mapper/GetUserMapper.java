@@ -18,6 +18,7 @@ public class GetUserMapper implements RowMapper<UserGetRes> {
         user.setDocument(rs.getString("document"));
         user.setId(rs.getLong("id"));
         user.setStatus(rs.getString("status"));
+        user.setRole(rs.getString("role_name"));
         userGetRes.setUser(user);
         return userGetRes;
     }
