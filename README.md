@@ -3,10 +3,15 @@ Microservicio para las operaciones con usuarios
 
 # Tecnologias utilizada
 Lenguaje: ```Java```
+
 Framework: ```Spring```
+
 Base datos: ```PostgreSql```
+
 Seguridad:  ```Posee su API la cual valia el API KEY y ACCESS TOKEN```
+
 Docker: ```Docker file para crear imagen ```
+
 Documentacion:```Swagger-ui para documentar los enpoint ```
 
 # Estructura de la tabla utilizada
@@ -25,4 +30,4 @@ Documentacion:```Swagger-ui para documentar los enpoint ```
 3- Ejcutar el comando ```mvn clean install``` en ambos proyectos para descargar las dependencias
 
 4- Tener configurado una base de datos ```postgres``` y adaptar la cadena de conexion del archivo ```applicatio.yml``` del proyecto ```mcs.user```
-5- Ejecutar el comando ```java -jar mcs.user.jar``
+5- Ejecutar el comando ```java -jar mcs.user.jar```
