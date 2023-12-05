@@ -32,9 +32,7 @@ public class UserController {
 
     @PostMapping(value = "/")
     @Operation(summary = "Add user",description = "Add a new user")
-    @SecurityAccess(operation = OperationAllow.ADD_USER)
     public UserPostResData addUser(
-            @RequestHeader(value = "access_token") String accessToken,
             @RequestBody @Valid UserPostReqData req
     ){
 
