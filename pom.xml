@@ -76,6 +76,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>mcs.user</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
