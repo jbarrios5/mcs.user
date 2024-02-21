@@ -8,15 +8,11 @@ import py.com.jmbr.java.commons.context.RequestContextInitializer;
 @EnableWebMvc
 public class AppMvcConfig  implements WebMvcConfigurer {
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestContextInitializer());
-        WebMvcConfigurer.super.addInterceptors(registry);
-    }
-
-
-
-    @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/","/swagger-ui.html");
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
     }
 }
